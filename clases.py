@@ -51,4 +51,3 @@ class Historial():
         self.id=id
         self.id_PACIENTE=id_PACIENTE
         self.id_OPERACION=id_OPERACION
-        
