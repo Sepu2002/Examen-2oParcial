@@ -90,10 +90,29 @@ def alta_expediente(idpaciente):
     expedient = open(f"{id}.txt", 'a')
     expedient.write(f'ID EXPEDIENTE: {expediente.id}\n')
     for i in range (0,len(Alergias)):
-        expedient.write(f'ALERGIA {i+1}: {Alergias[i]}\n')
-    expedient.write(f'ANT. CANCER: {Ant_Cancer}\n')
+        expedient.write(f'ALERGIA {i+1}: {Alergias[i]}, ')
+    expedient.write(f'\nANT. CANCER: {Ant_Cancer}\n')
     expedient.write(f'ANT. DIABETES: {Ant_Diabetes}\n')
     expedient.close
+
+def ver_expediente():
+    print("¿DE QUE PACIENTE DESEA VER EXPEDIENTE?")
+    for i in range (0,len(pacientes)):
+        if pacientes[i][6] == True:
+            print(f'{pacientes[i][0]}.- {pacientes[i][1]} {pacientes[i][2]} {pacientes[i][3]}')
+    id_mos = input("INGRESA EL ID DE QUIEN DESEA VER EXPEDIENTE: ")
+    clear_console()
+    expediente = open(f"{id_mos}.txt", 'r')
+    listita=[]
+    for i in expediente:
+        j = i
+        t_n = j.replace("\n","")
+        listita.append(t_n)
+    print(f"----------EXPEDIENTE DE CLIENTE CON ID {id_mos}------------")
+    for i in range (0, len(listita)-1):
+        print(listita[i])
+        print("----------------------")
+
 def menu():
     cont=True
     while cont:
@@ -101,7 +120,7 @@ def menu():
         print("1-Alta paciente")
         print("2-Habilitar paciente")
         print("3-Deshabilitar paciente")
-        #print("4-Ver expediente clínico")
+        print("4-Ver expediente clínico")
         #print("5-Alta insumo")
         #print("6-Habilitar insumo")
         #print("7-Deshabilitar insumo")
@@ -129,7 +148,7 @@ def menu():
         
         if opcion == 4: 
             clear_console()
-        
+            ver_expediente()
             input("OPRIMA ENTER PARA SALIR AL MENU")
         
         if opcion == 5: 
