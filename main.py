@@ -138,49 +138,57 @@ def alta_insumo():
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
         insumos[i_s][3] = insumos[i_s][3] + pares
-        insumos[i_s][4] = insumo.precio
-        insumos[i_s][5] = insumo.precio + (precio * cajas)
+        insumos[i_s][4] = precio
+        insumos[i_s][5] = insumo.costo + (precio * cajas)
     elif i_s == 1:
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         pares = int(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
         insumos[i_s][3] = insumos[i_s][3] + pares
-        insumos[i_s][4] = insumo.precio
-        insumos[i_s][5] = insumo.precio + (precio * cajas)
+        insumos[i_s][4] = precio
+        insumos[i_s][5] = insumo.costo + (precio * cajas)
     elif i_s == 2:
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
         insumos[i_s][3] = insumos[i_s][3] + unidades
-        insumos[i_s][4] = insumo.precio
-        insumos[i_s][5] = insumo.precio + (precio * cajas)
+        insumos[i_s][4] = precio
+        insumos[i_s][5] = insumo.costo + (precio * cajas)
     elif i_s == 3:
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
         insumos[i_s][3] = insumos[i_s][3] + unidades
-        insumos[i_s][4] = insumo.precio
-        insumos[i_s][5] = insumo.precio + (precio * cajas)
+        insumos[i_s][4] = precio
+        insumos[i_s][5] = insumo.costo + (precio * cajas)
     elif i_s == 4:
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
         insumos[i_s][3] = insumos[i_s][3] + unidades
-        insumos[i_s][4] = insumo.precio
-        insumos[i_s][5] = insumo.precio + (precio * cajas)
+        insumos[i_s][4] = precio
+        insumos[i_s][5] = insumo.costo + (precio * cajas)
     elif i_s == 5:
         frascos = int(input('INGRESA EL FRASCOS ADQUIRIDOS: '))
         ml = int(input('INGRESA EL NUMERO DE MILILITROS POR FRASCO: '))
         precio = int(input('INGRESA EL PRECIO DE CADA FRASCO: '))
         insumos[i_s][2] = insumo.cantidad + cajas
         insumos[i_s][3] = insumos[i_s][3] + ml
-        insumos[i_s][4] = insumo.precio
-        insumos[i_s][5] = insumo.precio + (precio * frascos)
+        insumos[i_s][4] = precio
+        insumos[i_s][5] = insumo.costo + (precio * frascos)
     
+    clear_console()
+    print('...................RESUMEN DE INSUMOS............................')
+    print('|   ID    |   INSUMO   |   CAJAS/FRASCOS   |   UNIDADES POR CAJA   |   PRECIO CAJA/FRASCO   |   GASTO ACUMULADO   |')
+    for i in range (0, len(insumos)):
+        print('..........................................................................')
+        print(f'|   {insumos[i][0]}   |   {insumos[i][1]}   |   {insumos[i][2]}   |   {insumos[i][3]}   |   {insumos[i][4]}   |   {insumos[i][5]}   |')
+    print('..........................................................................')
+        
 
 def menu():
     cont=True
@@ -222,7 +230,7 @@ def menu():
         
         if opcion == 5: 
             clear_console()
-        
+            alta_insumo()
             input("OPRIMA ENTER PARA SALIR AL MENU")
             
         if opcion == 6:
