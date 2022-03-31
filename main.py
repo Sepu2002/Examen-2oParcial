@@ -113,6 +113,75 @@ def ver_expediente():
         print(listita[i])
         print("----------------------")
 
+#-------------------ID-NOMBRE INSUMO----CAJAS-PARES-PRECIO CAJA--GASTO ACUMULADO
+guantes_desechables=[0,'GUANTE DESECHABLE',0, 0, 0,0]
+guantes_quirurgicos = [1,'GUANTE QUIRURGICO',0,0,0,0]
+mascarillas = [2,'MASCARILLAS',0,0,0,0]
+baberos = [3,'BABEROS',0,0,0,0]
+#jeringas-------------ID-NOMBRE INSUMO----CAJAS--CANTIDAD JERINGAS-PRECIO CAJA--GASTO ACUMULADO
+jeringas = [4,'JERINGAS',0,0,0,0]
+#anestesia------------ID-NOMBRE--CANTIDAD DE FRASCOS---MLporFRASCO---PRECIO FRASCO--GASTO ACUMULADO
+anestesia=[5,'ANESTESIA',0,0,0,0]
+insumos=[guantes_desechables,guantes_quirurgicos,mascarillas,baberos,jeringas,anestesia]
+
+def alta_insumo():
+    print("¿QUE INSUMO DESEA RESURTIR?")
+    for i in range (0,len(insumos)):
+        print(f'{i}.- {insumos[i][1]}')
+    i_s = int(input('INGRESE EL ID DEL INSUMO A RESURTIR: '))
+    insumo = Insumos(insumos[i_s][0],insumos[i_s][1],insumos[i_s][2],insumos[i_s][4])
+    clear_console()
+    print(f"-------RESURTIR {insumo.nombre}-----------")
+    if i_s == 0:
+        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        pares = int(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
+        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        insumos[i_s][2] = insumo.cantidad + cajas
+        insumos[i_s][3] = insumos[i_s][3] + pares
+        insumos[i_s][4] = insumo.precio
+        insumos[i_s][5] = insumo.precio + (precio * cajas)
+    elif i_s == 1:
+        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        pares = int(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
+        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        insumos[i_s][2] = insumo.cantidad + cajas
+        insumos[i_s][3] = insumos[i_s][3] + pares
+        insumos[i_s][4] = insumo.precio
+        insumos[i_s][5] = insumo.precio + (precio * cajas)
+    elif i_s == 2:
+        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
+        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        insumos[i_s][2] = insumo.cantidad + cajas
+        insumos[i_s][3] = insumos[i_s][3] + unidades
+        insumos[i_s][4] = insumo.precio
+        insumos[i_s][5] = insumo.precio + (precio * cajas)
+    elif i_s == 3:
+        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
+        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        insumos[i_s][2] = insumo.cantidad + cajas
+        insumos[i_s][3] = insumos[i_s][3] + unidades
+        insumos[i_s][4] = insumo.precio
+        insumos[i_s][5] = insumo.precio + (precio * cajas)
+    elif i_s == 4:
+        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
+        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        insumos[i_s][2] = insumo.cantidad + cajas
+        insumos[i_s][3] = insumos[i_s][3] + unidades
+        insumos[i_s][4] = insumo.precio
+        insumos[i_s][5] = insumo.precio + (precio * cajas)
+    elif i_s == 5:
+        frascos = int(input('INGRESA EL FRASCOS ADQUIRIDOS: '))
+        ml = int(input('INGRESA EL NUMERO DE MILILITROS POR FRASCO: '))
+        precio = int(input('INGRESA EL PRECIO DE CADA FRASCO: '))
+        insumos[i_s][2] = insumo.cantidad + cajas
+        insumos[i_s][3] = insumos[i_s][3] + ml
+        insumos[i_s][4] = insumo.precio
+        insumos[i_s][5] = insumo.precio + (precio * frascos)
+    
+
 def menu():
     cont=True
     while cont:
@@ -121,7 +190,7 @@ def menu():
         print("2-Habilitar paciente")
         print("3-Deshabilitar paciente")
         print("4-Ver expediente clínico")
-        #print("5-Alta insumo")
+        print("5-Alta insumo")
         #print("6-Habilitar insumo")
         #print("7-Deshabilitar insumo")
         #print("8-Alta operación")
@@ -189,4 +258,4 @@ menu()
 print(pacientes[0])
 print(pacientes[1])
 print(expedientes[0])  
-print(expedientes[1]) 
+print(expedientes[1])
