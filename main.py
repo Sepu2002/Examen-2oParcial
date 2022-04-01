@@ -114,7 +114,7 @@ def alta_expediente(idpaciente):
     expediente=Expediente(id, idpac, Alergias, Ant_Cancer, Ant_Diabetes)
     e=[id, idpac, Alergias, Ant_Cancer, Ant_Diabetes]
     expedientes.append(e)
-    expedient = open(f"{id}.txt", 'a')
+    expedient = open(f"{idpac}.txt", 'a')
     expedient.write(f'\nID EXPEDIENTE: {expediente.id}\n')
     for i in range (0,len(Alergias)):
         expedient.write(f'ALERGIA {i+1}: {Alergias[i]}, ')
@@ -262,7 +262,7 @@ def alta_insumo():
         ml = int(input('INGRESA EL NUMERO DE MILILITROS POR FRASCO: '))
         precio = int(input('INGRESA EL PRECIO DE CADA FRASCO: '))
         insumos[i_s][2] = insumo.cantidad + frascos
-        insumos[i_s][3] = (insumos[i_s][3]) + ml
+        insumos[i_s][3] = int(insumos[i_s][3]) + ml
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * frascos)
         escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -290,7 +290,17 @@ def alta_insumo():
             print('..........................................................................')
             print(f'|   {insumos[i][0]}   |   {insumos[i][1]}   |   {insumos[i][2]}   |   {insumos[i][3]}   |   {insumos[i][4]}   |   {insumos[i][5]}   |')
     print('..........................................................................')
-        
+
+def ver_insumos():
+    clear_console()
+    print('...................RESUMEN DE INSUMOS............................')
+    print('|   ID    |   INSUMO   |   CAJAS/FRASCOS ACUMULADOS   |   UNIDADES TOTALES  |   PRECIO CAJA/FRASCO ULTIMO   |   GASTO ACUMULADO   |')
+    for i in range (0, len(insumos)):
+        if int(insumos[i][6]) == 1:
+            print('..........................................................................')
+            print(f'|   {insumos[i][0]}   |   {insumos[i][1]}   |   {insumos[i][2]}   |   {insumos[i][3]}   |   {insumos[i][4]}   |   {insumos[i][5]}   |')
+    print('..........................................................................')
+
 def habilitar_insumo():
     nombre = str(input('INGRESA EL NOMBRE DEL INSUMO: '))
     cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
@@ -347,11 +357,12 @@ def menu():
         print("6-Ingresar insumo nuevo")
         print("7-Deshabilitar insumo")
         print("8-Habilitar insumo")
-        #print("9-Alta operación")
-        #print("10-Habilitar operación")
-        #print("11-Deshabilitar operación")
-        #print("12-Ver historial de operaciones")
-        print("13-Cerrar programa")
+        print("9-Ver insumos")
+        #print("10-Alta operación")
+        #print("11-Habilitar operación")
+        #print("12-Deshabilitar operación")
+        #print("13-Ver historial de operaciones")
+        print("14-Cerrar programa")
         
         opcion = int(input("OPCION ELEGIDA:  "))
         if opcion == 1: 
@@ -395,7 +406,8 @@ def menu():
             input("OPRIMA ENTER PARA SALIR AL MENU")
             
         if opcion == 9: 
-        
+            clear_console()
+            ver_insumos()
             input("OPRIMA ENTER PARA SALIR AL MENU")
             
         if opcion == 10: 
@@ -409,8 +421,11 @@ def menu():
         if opcion == 12: 
         
             input("OPRIMA ENTER PARA SALIR AL MENU")
-            
         if opcion == 13: 
+        
+            input("OPRIMA ENTER PARA SALIR AL MENU")
+            
+        if opcion == 14: 
             cont=False
             input("OPRIMA ENTER PARA SALIR")
 
@@ -427,8 +442,6 @@ for e in listatamaños:
 if g != 0:
     for raw in range (0,g):
         insumos.append('')    
-for i in range(0, len(insumos)):
-    print(insumos[i])
 insunuevos = open("insumosNuevos.txt",'a')
 insunuevos.close
 idPacientesGeneral = open('ID_PACIENTES.txt', 'a')
