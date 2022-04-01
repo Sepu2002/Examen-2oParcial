@@ -189,8 +189,6 @@ def escribir_archivo_insumos(id, nombre, cajas, unidades, precio, acumulado, act
     insumo.close
 
 def alta_insumo():
-    print(len(insumos))
-    input()
     print("¿QUE INSUMO DESEA RESURTIR?")
     for i in range (0,len(insumos)):
         if int(insumos[i][6]) == 1:
@@ -421,7 +419,6 @@ def menu():
 listatamaño = open('tamalista.txt', 'a')
 listatamaño.close
 listatamaños = open('tamalista.txt', 'r')
-print(len(insumos))
 g = 0
 for e in listatamaños:
     if e != '':
