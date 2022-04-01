@@ -194,15 +194,15 @@ def alta_insumo():
         if int(insumos[i][6]) == 1:
             print(f'{i}.- {insumos[i][1]}')
     i_s = int(input('INGRESE EL ID DEL INSUMO A RESURTIR: '))
-    insumo = Insumos(insumos[i_s][0],insumos[i_s][1],int(insumos[i_s][2]),int(insumos[i_s][5]))
+    insumo = Insumos(insumos[i_s][0],insumos[i_s][1],float(insumos[i_s][2]),float(insumos[i_s][5]))
     clear_console()
     print(f"-------RESURTIR {insumo.nombre}-----------")
     if i_s == 0:
-        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
-        pares = int(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
-        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        pares = float(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
+        precio = float(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = int(insumos[i_s][3]) + (pares*cajas)
+        insumos[i_s][3] = float(insumos[i_s][3]) + (pares*cajas)
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
         escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -210,11 +210,11 @@ def alta_insumo():
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
     elif i_s == 1:
-        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
-        pares = int(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
-        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        pares = float(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
+        precio = float(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = int(insumos[i_s][3]) + (pares*cajas)
+        insumos[i_s][3] = float(insumos[i_s][3]) + (pares*cajas)
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
         escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -222,11 +222,11 @@ def alta_insumo():
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
     elif i_s == 2:
-        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
-        unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
-        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
+        precio = float(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = int(insumos[i_s][3]) + (unidades*cajas)
+        insumos[i_s][3] = float(insumos[i_s][3]) + (unidades*cajas)
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
         escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -234,11 +234,11 @@ def alta_insumo():
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
     elif i_s == 3:
-        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
-        unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
-        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
+        precio = float(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = int(insumos[i_s][3]) + (unidades*cajas)
+        insumos[i_s][3] = float(insumos[i_s][3]) + (unidades*cajas)
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
         escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -246,11 +246,11 @@ def alta_insumo():
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
     elif i_s == 4:
-        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
-        unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
-        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
+        precio = float(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = int(insumos[i_s][3]) + (unidades*cajas)
+        insumos[i_s][3] = float(insumos[i_s][3]) + (unidades*cajas)
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
         escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -258,11 +258,11 @@ def alta_insumo():
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
     elif i_s == 5:
-        frascos = int(input('INGRESA EL FRASCOS ADQUIRIDOS: '))
-        ml = int(input('INGRESA EL NUMERO DE MILILITROS POR FRASCO: '))
-        precio = int(input('INGRESA EL PRECIO DE CADA FRASCO: '))
+        frascos = float(input('INGRESA EL FRASCOS ADQUIRIDOS: '))
+        ml = float(input('INGRESA EL NUMERO DE MILILITROS POR FRASCO: '))
+        precio = float(input('INGRESA EL PRECIO DE CADA FRASCO: '))
         insumos[i_s][2] = insumo.cantidad + frascos
-        insumos[i_s][3] = int(insumos[i_s][3]) + (ml*frascos)
+        insumos[i_s][3] = float(insumos[i_s][3]) + (ml*frascos)
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * frascos)
         escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -270,11 +270,11 @@ def alta_insumo():
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
     elif i_s > 5 and i_s < len(insumos):
-        cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
-        unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
-        precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+        cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+        unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
+        precio = float(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = int(insumos[i_s][3]) + (unidades*cajas)
+        insumos[i_s][3] = float(insumos[i_s][3]) + (unidades*cajas)
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
         escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -303,9 +303,9 @@ def ver_insumos():
 
 def habilitar_insumo():
     nombre = str(input('INGRESA EL NOMBRE DEL INSUMO: '))
-    cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
-    unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
-    precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
+    cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
+    unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
+    precio = float(input('INGRESA EL PRECIO DE CADA CAJA: '))
     id = len(insumos)
     listalocal =[id,nombre,cajas,unidades,precio,(precio*cajas),1]
     insunuevos = open("insumosNuevos.txt",'a')
@@ -362,53 +362,53 @@ def alta_operacion():
         ver_insumos()
         if f == "s" or f == 'S':
             i_s = int(input('INGRESA EL ID DEL INSUMO A UTILIZAR: '))
-            insumo = Insumos(insumos[i_s][0],insumos[i_s][1],int(insumos[i_s][2]),int(insumos[i_s][5]))
+            insumo = Insumos(insumos[i_s][0],insumos[i_s][1],float(insumos[i_s][2]),float(insumos[i_s][5]))
             clear_console()
             print(f"-------UTILIZAR {insumo.nombre}-----------")
             insumo_pro = []
             if i_s == 0:
-                pares = int(input('INGRESA EL NUMERO DE PARES A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][2])) * pares)
+                pares = float(input('INGRESA EL NUMERO DE PARES A UTILIZAR: '))
+                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
                 insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = int(insumos[i_s][3]) - pares
+                insumos[i_s][3] = float(insumos[i_s][3]) - pares
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 1:
-                pares = int(input('INGRESA EL NUMERO DE PARES A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][2])) * pares)
+                pares = float(input('INGRESA EL NUMERO DE PARES A UTILIZAR: '))
+                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
                 insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = int(insumos[i_s][3]) - pares
+                insumos[i_s][3] = float(insumos[i_s][3]) - pares
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 2:
-                pares = int(input('INGRESA EL NUMERO DE MASCARILLAS: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][2])) * pares)
+                pares = float(input('INGRESA EL NUMERO DE MASCARILLAS: '))
+                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
                 insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = int(insumos[i_s][3]) - pares
+                insumos[i_s][3] = float(insumos[i_s][3]) - pares
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 3:
-                pares = int(input('INGRESA EL NUMERO DE BABEROS A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][2])) * pares)
+                pares = float(input('INGRESA EL NUMERO DE BABEROS A UTILIZAR: '))
+                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
                 insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = int(insumos[i_s][3]) - pares
+                insumos[i_s][3] = float(insumos[i_s][3]) - pares
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 4:
-                pares = int(input('INGRESA EL NUMERO DE JERINGAS: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][2])) * pares)
+                pares = float(input('INGRESA EL NUMERO DE JERINGAS: '))
+                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
                 insumos[i_s][5] = insumo.costo - costo_insumo
                 insumos[i_s][3] = float(insumos[i_s][3]) - pares
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -418,7 +418,7 @@ def alta_operacion():
                 
             elif i_s == 5:
                 pares = float(input('INGRESA EL NUMERO DE MILILITROS DE ANESTESIA A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][2])) * pares)
+                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
                 insumos[i_s][5] = insumo.costo - costo_insumo
                 insumos[i_s][3] = float(insumos[i_s][3]) - pares
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
@@ -428,7 +428,7 @@ def alta_operacion():
                 
             elif i_s > 5 and i_s < len(insumos):
                 pares = float(input('INGRESA EL NUMERO DE UNIDADES A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][2])) * pares)
+                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
                 insumos[i_s][5] = insumo.costo - costo_insumo
                 insumos[i_s][3] = float(insumos[i_s][3]) - pares
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
