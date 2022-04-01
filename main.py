@@ -345,6 +345,7 @@ def activar():
 
 def alta_operacion():
     insumos_operacion=[]
+    costo_materiales = 0
     print("¿A QUE PACIENTE REALIZARÁ LA OPERACIÓN?")
     for i in range (0,len(pacientes)):
         if pacientes[i][6] == 'True':
@@ -352,6 +353,7 @@ def alta_operacion():
     id_mos = input("INGRESA EL ID DE CLIENTE: ")
     clear_console()
     tipo = str(input('INGRESE EL TIPO DE OPERACIÓN QUE REALIZARÁ: '))
+    mo = float(input('INDICA EL COSTO DE MANO DE OBRA DE ESTE PROCEDIMIENTO: '))
     clear_console()
     print('¿QUE INSUMOS UTILIZARÁ?')
     ver_insumos()
@@ -374,6 +376,7 @@ def alta_operacion():
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
+                costo_materiales = costo_materiales + costo_insumo
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 1:
@@ -384,6 +387,7 @@ def alta_operacion():
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
+                costo_materiales = costo_materiales + costo_insumo
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 2:
@@ -394,6 +398,7 @@ def alta_operacion():
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
+                costo_materiales = costo_materiales + costo_insumo
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 3:
@@ -404,6 +409,7 @@ def alta_operacion():
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
+                costo_materiales = costo_materiales + costo_insumo
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 4:
@@ -414,6 +420,7 @@ def alta_operacion():
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
+                costo_materiales = costo_materiales + costo_insumo
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 5:
@@ -424,6 +431,7 @@ def alta_operacion():
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
+                costo_materiales = costo_materiales + costo_insumo
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s > 5 and i_s < len(insumos):
@@ -434,9 +442,21 @@ def alta_operacion():
                 escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
                 insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
                 insumos_operacion.append(insumo_pro)
+                costo_materiales = costo_materiales + costo_insumo
                 f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
         else:
-            break
+            a = False
+    data_operación = Operacion(len(operaciones),tipo,mo,(mo+costo_materiales))
+    archivooper = open(f'OPERACION_{id_mos}_{data_operación.id}.txt', 'a')
+    archivooper.write(f'ID OPERACIÓN: {data_operación.id}\n')
+    archivooper.write(f'PROCEDIMIENTO REALIZADO: {tipo}\n')
+    archivooper.write(f'MANO DE OBRA: ${mo}\n')
+    archivooper.write(f'COSTO MATERIALES: ${costo_materiales}\n')
+    archivooper.write(f'COSTO TOTAL OPERACIÓN: ${data_operación.costTot}\n')
+    for i in range (0, len(insumos_operacion)):
+        for a in range (0, 3):
+            pass
+
 
 
 
