@@ -101,8 +101,7 @@ def getAlergias():
                     opt=False
                     
         if aler=='n' or aler=='N':
-            Alergias.append("Ninguna")
-            
+            Alergias.append("Ninguna")      
         return Alergias
     
 def alta_expediente(idpaciente):
@@ -137,10 +136,24 @@ def ver_expediente():
         t_n = j.replace("\n","")
         listita.append(t_n)
     print(f"----------EXPEDIENTE DE CLIENTE CON ID {id_mos}------------")
-    for i in range (0, len(listita)-1):
-        print(listita[i])
-        print("----------------------")
+    for i in range (0, len(listita)):
+        if i < 4 or i > 4:
+            print(listita[i])
+            print("----------------------")
 
+def leer_insumos_predert():
+    insunuevos = open("insumosNuevos.txt",'r')
+    for o in insunuevos:
+        a = o
+        r = a.replace("\n","")
+        idgeneral = open(f'{int(r)}_insumo.txt', 'r')
+        p =[]
+        for i in idgeneral:
+            j = i
+            t = j.replace("\n","")
+            p.append(t)
+        insumos[int(r)] = p
+        idgeneral.close
 #-------------------ID-NOMBRE INSUMO----CAJAS-PARES-PRECIO CAJA--GASTO ACUMULADO
 guantes_desechables=[0,'GUANTE DESECHABLE',0, 0, 0,0,1]
 guantes_quirurgicos = [1,'GUANTE QUIRURGICO',0,0,0,0,1]
@@ -150,15 +163,38 @@ baberos = [3,'BABEROS',0,0,0,0,1]
 jeringas = [4,'JERINGAS',0,0,0,0,1]
 #anestesia------------ID-NOMBRE--CANTIDAD DE FRASCOS---MLporFRASCO---PRECIO FRASCO--GASTO ACUMULADO
 anestesia=[5,'ANESTESIA',0,0,0,0,1]
+insumo0 = open(f'{0}_insumo.txt', 'a')
+insumo1 = open(f'{1}_insumo.txt', 'a')
+insumo2 = open(f'{2}_insumo.txt', 'a')
+insumo3 = open(f'{3}_insumo.txt', 'a')
+insumo4 = open(f'{4}_insumo.txt', 'a')
+insumo5 = open(f'{5}_insumo.txt', 'a')
+insumo0.close
+insumo1.close
+insumo2.close
+insumo3.close
+insumo4.close
+insumo5.close
 insumos=[guantes_desechables,guantes_quirurgicos,mascarillas,baberos,jeringas,anestesia]
+
+def escribir_archivo_insumos(id, nombre, cajas, unidades, precio, acumulado, activacion):
+    insumo = open(f'{id}_insumo.txt', 'w')
+    insumo.write(f'{id}\n')
+    insumo.write(f'{nombre}\n')
+    insumo.write(f'{cajas}\n')
+    insumo.write(f'{unidades}\n')
+    insumo.write(f'{precio}\n')
+    insumo.write(f'{acumulado}\n')
+    insumo.write(f'{activacion}')
+    insumo.close
 
 def alta_insumo():
     print("¿QUE INSUMO DESEA RESURTIR?")
     for i in range (0,len(insumos)):
-        if insumos[i][6] == 1:
+        if int(insumos[i][6]) == 1:
             print(f'{i}.- {insumos[i][1]}')
     i_s = int(input('INGRESE EL ID DEL INSUMO A RESURTIR: '))
-    insumo = Insumos(insumos[i_s][0],insumos[i_s][1],insumos[i_s][2],insumos[i_s][4])
+    insumo = Insumos(insumos[i_s][0],insumos[i_s][1],int(insumos[i_s][2]),int(insumos[i_s][5]))
     clear_console()
     print(f"-------RESURTIR {insumo.nombre}-----------")
     if i_s == 0:
@@ -166,63 +202,91 @@ def alta_insumo():
         pares = int(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = insumos[i_s][3] + pares
+        insumos[i_s][3] = int(insumos[i_s][3]) + pares
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
+        escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+        insunuevos = open("insumosNuevos.txt",'a')
+        insunuevos.write(f'{insumos[i_s][0]}\n')
+        insunuevos.close
     elif i_s == 1:
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         pares = int(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = insumos[i_s][3] + pares
+        insumos[i_s][3] = int(insumos[i_s][3]) + pares
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
+        escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+        insunuevos = open("insumosNuevos.txt",'a')
+        insunuevos.write(f'{insumos[i_s][0]}\n')
+        insunuevos.close
     elif i_s == 2:
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = insumos[i_s][3] + unidades
+        insumos[i_s][3] = int(insumos[i_s][3]) + unidades
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
+        escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+        insunuevos = open("insumosNuevos.txt",'a')
+        insunuevos.write(f'{insumos[i_s][0]}\n')
+        insunuevos.close
     elif i_s == 3:
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = insumos[i_s][3] + unidades
+        insumos[i_s][3] = int(insumos[i_s][3]) + unidades
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
+        escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+        insunuevos = open("insumosNuevos.txt",'a')
+        insunuevos.write(f'{insumos[i_s][0]}\n')
+        insunuevos.close
     elif i_s == 4:
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = insumos[i_s][3] + unidades
+        insumos[i_s][3] = int(insumos[i_s][3]) + unidades
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
+        escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+        insunuevos = open("insumosNuevos.txt",'a')
+        insunuevos.write(f'{insumos[i_s][0]}\n')
+        insunuevos.close
     elif i_s == 5:
         frascos = int(input('INGRESA EL FRASCOS ADQUIRIDOS: '))
         ml = int(input('INGRESA EL NUMERO DE MILILITROS POR FRASCO: '))
         precio = int(input('INGRESA EL PRECIO DE CADA FRASCO: '))
         insumos[i_s][2] = insumo.cantidad + frascos
-        insumos[i_s][3] = insumos[i_s][3] + ml
+        insumos[i_s][3] = (insumos[i_s][3]) + ml
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * frascos)
+        escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+        insunuevos = open("insumosNuevos.txt",'a')
+        insunuevos.write(f'{insumos[i_s][0]}\n')
+        insunuevos.close
     elif i_s > 5 and i_s < len(insumos):
         cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
         precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
         insumos[i_s][2] = insumo.cantidad + cajas
-        insumos[i_s][3] = insumos[i_s][3] + unidades
+        insumos[i_s][3] = int(insumos[i_s][3]) + unidades
         insumos[i_s][4] = precio
         insumos[i_s][5] = insumo.costo + (precio * cajas)
+        escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+        insunuevos = open("insumosNuevos.txt",'a')
+        insunuevos.write(f'{insumos[i_s][0]}\n')
+        insunuevos.close
 
     clear_console()
     print('...................RESUMEN DE INSUMOS............................')
-    print('|   ID    |   INSUMO   |   CAJAS/FRASCOS   |   UNIDADES POR CAJA   |   PRECIO CAJA/FRASCO   |   GASTO ACUMULADO   |')
+    print('|   ID    |   INSUMO   |   CAJAS/FRASCOS ACUMULADOS   |   UNIDADES TOTALES  |   PRECIO CAJA/FRASCO ULTIMO   |   GASTO ACUMULADO   |')
     for i in range (0, len(insumos)):
-        if insumos[i][6] == 1:
+        if int(insumos[i][6]) == 1:
             print('..........................................................................')
             print(f'|   {insumos[i][0]}   |   {insumos[i][1]}   |   {insumos[i][2]}   |   {insumos[i][3]}   |   {insumos[i][4]}   |   {insumos[i][5]}   |')
     print('..........................................................................')
@@ -232,24 +296,42 @@ def habilitar_insumo():
     cajas = int(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
     unidades = int(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
     precio = int(input('INGRESA EL PRECIO DE CADA CAJA: '))
-    listalocal =[len(insumos),nombre,cajas,unidades,precio,(precio*cajas),1]
+    id = len(insumos)
+    listalocal =[id,nombre,cajas,unidades,precio,(precio*cajas),1]
+    insunuevos = open("insumosNuevos.txt",'a')
+    insunuevos.write(f'{id} \n')
+    insunuevos.close
     insumos.append(listalocal)
+    listatamano = open('tamalista.txt', 'w')
+    listatamano.write(f'{len(insumos)}')
+    listatamano.close
+    insumo = open(f'{id}_insumo.txt', 'a')
+    insumo.write(f'{id}\n')
+    insumo.write(f'{nombre}\n')
+    insumo.write(f'{cajas}\n')
+    insumo.write(f'{unidades}\n')
+    insumo.write(f'{precio}\n')
+    insumo.write(f'{listalocal[5]}\n')
+    insumo.write(f'1')
+    insumo.close
 
 def inactivar():
     print("¿QUE INSUMO DESEA INACTIVAR?")
     for i in range (0,len(insumos)):
-        if insumos[i][6] == 1:
+        if int(insumos[i][6]) == 1:
             print(f'{i}.- {insumos[i][1]}')
     i_s = int(input('INGRESE EL ID DEL INSUMO A INACTIVAR: '))
     insumos[i_s][6] = 0
+    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
 
 def activar():
     print("¿QUE INSUMO DESEA ACTIVAR?")
     for i in range (0,len(insumos)):
-        if insumos[i][6] == 0:
+        if int(insumos[i][6]) == 0:
             print(f'{i}.- {insumos[i][1]}')
     i_s = int(input('INGRESE EL ID DEL INSUMO A ACTIVAR: '))
     insumos[i_s][6] = 1
+    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
 
 def alta_operacion():
     pass    
@@ -265,8 +347,6 @@ def menu():
         print("6-Ingresar insumo nuevo")
         print("7-Deshabilitar insumo")
         print("8-Habilitar insumo")
-        print(pacientes[0])
-        print(pacientes[1])
         #print("9-Alta operación")
         #print("10-Habilitar operación")
         #print("11-Deshabilitar operación")
@@ -336,7 +416,24 @@ def menu():
 
 
 #----------------------------------------------------------------------
+listatamaño = open('tamalista.txt', 'a')
+listatamaño.close
+listatamaños = open('tamalista.txt', 'r')
+print(len(insumos))
+g = 0
+for e in listatamaños:
+    tamaño = int(e)
+    g = tamaño - len(insumos)
+for raw in range (0,g+1):
+    insumos.append('')
+    
+for i in range(0, len(insumos)):
+    print(insumos[i])
+
+insunuevos = open("insumosNuevos.txt",'a')
+insunuevos.close
 idPacientesGeneral = open('ID_PACIENTES.txt', 'a')
 idPacientesGeneral.close
 leer_pacientes()
+leer_insumos_predert()
 menu()
