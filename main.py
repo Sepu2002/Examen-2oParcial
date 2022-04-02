@@ -51,6 +51,10 @@ def alta_paciente():
     idPacientesGeneral = open('ID_PACIENTES.txt', 'a')
     idPacientesGeneral.write(f'{id}\n')
     idPacientesGeneral.close
+    archivo = open(f'Operaciones_{paciente.id}.txt', 'a')
+    archivo_aportacion = open(f'APORTACION_{paciente.id}.txt','a')
+    archivo.close
+    archivo_aportacion.close
 
 def leer_pacientes():
     idgeneral = open('ID_PACIENTES.txt', 'r')
@@ -189,6 +193,16 @@ def escribir_archivo_insumos(id, nombre, cajas, unidades, precio, acumulado, act
     insumo.write(f'{activacion}')
     insumo.close
 
+def gastos_general(costo):
+    gastos_engeneral = open('Gastos_Insumos.txt','r')
+    gastos = 0
+    for i in gastos_general:
+        gastos = float(i)
+    gastos_general.close
+    gastos_engeneralw = open('Gastos_Insumos.txt','w')
+    gastos_engeneralw.write(f'{gastos}')
+    gastos_engeneralw.close
+
 def alta_insumo():
     print("¿QUE INSUMO DESEA RESURTIR?")
     for i in range (0,len(insumos)):
@@ -210,6 +224,7 @@ def alta_insumo():
         insunuevos = open("insumosNuevos.txt",'a')
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
+        gastos_general(precio * cajas)
     elif i_s == 1:
         cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         pares = float(input('INGRESA EL NUMERO DE PARES EN LA CAJA: '))
@@ -222,6 +237,7 @@ def alta_insumo():
         insunuevos = open("insumosNuevos.txt",'a')
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
+        gastos_general(precio * cajas)
     elif i_s == 2:
         cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
@@ -234,6 +250,7 @@ def alta_insumo():
         insunuevos = open("insumosNuevos.txt",'a')
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
+        gastos_general(precio * cajas)
     elif i_s == 3:
         cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
@@ -246,6 +263,7 @@ def alta_insumo():
         insunuevos = open("insumosNuevos.txt",'a')
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
+        gastos_general(precio * cajas)
     elif i_s == 4:
         cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
@@ -258,6 +276,7 @@ def alta_insumo():
         insunuevos = open("insumosNuevos.txt",'a')
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
+        gastos_general(precio * cajas)
     elif i_s == 5:
         frascos = float(input('INGRESA EL FRASCOS ADQUIRIDOS: '))
         ml = float(input('INGRESA EL NUMERO DE MILILITROS POR FRASCO: '))
@@ -270,6 +289,7 @@ def alta_insumo():
         insunuevos = open("insumosNuevos.txt",'a')
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
+        gastos_general(precio * cajas)
     elif i_s > 5 and i_s < len(insumos):
         cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
@@ -282,10 +302,11 @@ def alta_insumo():
         insunuevos = open("insumosNuevos.txt",'a')
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
+        gastos_general(precio * cajas)
 
     clear_console()
     print('...................RESUMEN DE INSUMOS............................')
-    print('|   ID    |   INSUMO   |   CAJAS/FRASCOS ACUMULADOS   |   UNIDADES TOTALES  |   PRECIO CAJA/FRASCO ULTIMO   |   GASTO ACUMULADO   |')
+    print('|   ID    |   INSUMO   |   CAJAS/FRASCOS ACUMULADOS   |   UNIDADES TOTALES  |   PRECIO CAJA/FRASCO ULTIMO   |   COSTO DE LAS UNIDADES EN EXISTENCIA   |')
     for i in range (0, len(insumos)):
         if int(insumos[i][6]) == 1:
             print('..........................................................................')
@@ -295,7 +316,7 @@ def alta_insumo():
 def ver_insumos():
     clear_console()
     print('...................RESUMEN DE INSUMOS............................')
-    print('|   ID    |   INSUMO   |   CAJAS/FRASCOS ACUMULADOS   |   UNIDADES TOTALES  |   PRECIO CAJA/FRASCO ULTIMO   |   GASTO ACUMULADO   |')
+    print('|   ID    |   INSUMO   |   CAJAS/FRASCOS ACUMULADOS   |   UNIDADES TOTALES  |   PRECIO CAJA/FRASCO ULTIMO   |   COSTO DE LAS UNIDADES EN EXISTENCIA   |')
     for i in range (0, len(insumos)):
         if int(insumos[i][6]) == 1:
             print('..........................................................................')
@@ -325,6 +346,7 @@ def habilitar_insumo():
     insumo.write(f'{listalocal[5]}\n')
     insumo.write(f'1')
     insumo.close
+    gastos_general(precio * cajas)
 
 def inactivar():
     print("¿QUE INSUMO DESEA INACTIVAR?")
@@ -501,6 +523,7 @@ def alta_operacion():
     archivo_aportación.close
     apw = open(f'APORTACION_{id_mos}.txt','w')
     apw.write(f'{ap_parcial+data_operación.costTot}')
+
 def lectura_operaciones():
     idOperGen = open('NUMERO_OPERACIONES.txt', 'r')
     p =[]
@@ -546,6 +569,51 @@ def ver_hist_pacientes():
         print(t)
     archivooper.close
 
+def operaciones_paciente():
+    print("¿DE QUE PACIENTE DESEA VER SU INFORMACIÓN DE APORTACIONES Y OPERACIONES?")
+    for i in range (0,len(pacientes)):
+        if pacientes[i][6] == 'True':
+            print(f'{pacientes[i][0]}.- {pacientes[i][1]} {pacientes[i][2]} {pacientes[i][3]}')
+    id_mos = int(input("INGRESA EL ID DE CLIENTE: "))
+    clear_console()
+    archivo = open(f'Operaciones_{id_mos}.txt', 'r')
+    conteo_operaciones = 0
+    for d in archivo:
+        j = d
+        t = j.replace("\n","")
+        conteo_operaciones+=1
+        print(t)
+    print('----------------------------------------------------------------')
+    print(f'NUMERO DE OPERACIONES DE {pacientes[id_mos][1]}: {conteo_operaciones}')
+    print('----------------------------------------------------------------')
+    archivo_aportacion = open(f'APORTACION_{id_mos}.txt','r')
+    for R in archivo_aportacion:
+        j = R
+        t = j.replace("\n","")
+        print(f'TOTAL DE APOPRTACION DEL PACIENTE A CONSULTORIO: ${t}')
+
+def analisi_monetario():
+    Gas = open('GASTOS.txt','r')
+    Ing = open('INGRESOS.txt','r')
+    gastos_engeneral = open('Gastos_Insumos.txt','r')
+    gasto_tot = 0
+    gasto_insumos=0
+    ingre = 0
+    for g in Gas:
+        gasto_insumos = float(g)
+    for i in Ing:
+        ingre = float(i)
+    for gg in gastos_engeneral:
+        gasto_tot = float(gg)
+
+    print('------------------GASTO ACUMULADO (insumos comprados hasta el momento)-------------')
+    print(f'                           USTED HA GASTADO: ${gasto_tot}\n')
+    print('------------------GASTO INSUMOS USADOS (insumos usados en todas las operaciones)-------------')
+    print(f'                           USTED HA GASTADO: ${gasto_insumos}\n')
+    print('------------------INGRESOS ACUMULADOS (ingresos por mano de obra de todas las operaciones)-------------')
+    print(f'                           USTED HA GANADO: ${ingre}\n')
+    print(f'SUS GANACIAS RESPECTO A INGRESOS E INSUMOS USADOS ES DE:  {ingre-gasto_insumos}')
+    print(f'SUS GANACIAS RESPECTO A INGRESOS E INSUMOS COMPRADOS ES DE:  {ingre-gasto_tot}')
 def menu():
     cont=True
     while cont:
@@ -562,7 +630,7 @@ def menu():
         print("10-Alta operación")
         print("11-Ver operaciones por paciente")
         print("12-Ver historial de operaciones")
-        #print('13.- PANEL DE ANALÍTICAS')
+        print('13.- PANEL DE ANALÍTICAS')
         print("14-Cerrar programa")
         
         opcion = int(input("OPCION ELEGIDA:  "))
@@ -627,7 +695,23 @@ def menu():
             input("OPRIMA ENTER PARA SALIR AL MENU")
             
         if opcion == 13: 
-    
+            x = True
+            while x:
+                clear_console()
+                print("1-Operaciones por Paciente Individualmente")
+                print("2-Análisis de Ganancias")
+                print("3.-Salir a menú principal")
+                opci = int(input("OPCION ELEGIDA:  "))
+                if opci == 1: 
+                    clear_console()
+                    operaciones_paciente()
+                    input("OPRIMA ENTER PARA SALIR AL MENU")
+                if opci == 2: 
+                    clear_console()
+                    analisi_monetario()
+                    input("OPRIMA ENTER PARA SALIR AL MENU")
+                elif opci == 3:
+                    x = False
             input("OPRIMA ENTER PARA SALIR AL MENU")
             
         if opcion == 14: 
@@ -636,6 +720,8 @@ def menu():
 
 
 #----------------------------------------------------------------------
+gastos_engeneral = open('Gastos_Insumos.txt','a')
+gastos_engeneral.close
 ingresos = open('INGRESOS.txt','a')
 ingresos.close
 ingresos = open('GASTOS.txt','a')
