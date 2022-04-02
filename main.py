@@ -196,11 +196,11 @@ def escribir_archivo_insumos(id, nombre, cajas, unidades, precio, acumulado, act
 def gastos_general(costo):
     gastos_engeneral = open('Gastos_Insumos.txt','r')
     gastos = 0
-    for i in gastos_general:
+    for i in gastos_engeneral:
         gastos = float(i)
-    gastos_general.close
+    gastos_engeneral.close
     gastos_engeneralw = open('Gastos_Insumos.txt','w')
-    gastos_engeneralw.write(f'{gastos}')
+    gastos_engeneralw.write(f'{gastos+costo}')
     gastos_engeneralw.close
 
 def alta_insumo():
@@ -289,7 +289,7 @@ def alta_insumo():
         insunuevos = open("insumosNuevos.txt",'a')
         insunuevos.write(f'{insumos[i_s][0]}\n')
         insunuevos.close
-        gastos_general(precio * cajas)
+        gastos_general(precio * frascos)
     elif i_s > 5 and i_s < len(insumos):
         cajas = float(input('INGRESA EL NUMERO DE CAJAS ADQUIRIDAS: '))
         unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
@@ -329,7 +329,7 @@ def habilitar_insumo():
     unidades = float(input('INGRESA EL NUMERO DE UNIDADES EN LA CAJA: '))
     precio = float(input('INGRESA EL PRECIO DE CADA CAJA: '))
     id = len(insumos)
-    listalocal =[id,nombre,cajas,unidades,precio,(precio*cajas),1]
+    listalocal =[id,nombre,cajas,(unidades*cajas),precio,(precio*cajas),1]
     insunuevos = open("insumosNuevos.txt",'a')
     insunuevos.write(f'{id} \n')
     insunuevos.close
@@ -341,7 +341,7 @@ def habilitar_insumo():
     insumo.write(f'{id}\n')
     insumo.write(f'{nombre}\n')
     insumo.write(f'{cajas}\n')
-    insumo.write(f'{unidades}\n')
+    insumo.write(f'{unidades*cajas}\n')
     insumo.write(f'{precio}\n')
     insumo.write(f'{listalocal[5]}\n')
     insumo.write(f'1')
@@ -393,136 +393,179 @@ def alta_operacion():
             insumo_pro = []
             if i_s == 0:
                 pares = float(input('INGRESA EL NUMERO DE PARES A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
-                insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = float(insumos[i_s][3]) - pares
-                escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
-                insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
-                insumos_operacion.append(insumo_pro)
-                costo_materiales = costo_materiales + costo_insumo
-                f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
+                if pares > float(insumos[i_s][3]):
+                    print('NO CUENTAS CON LA CANTIDAD SUFICIENTE DE UNIDADES DE ESTE INSUMO')
+                    input('SERÁ REGRESADO AL MENÚ PRINCIPAL PARA REABASTECER SUS INSUMOS -OPRIMA ENTER- ')
+                    f = 'n'
+                    break
+                else: 
+                    costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
+                    insumos[i_s][5] = insumo.costo - costo_insumo
+                    insumos[i_s][3] = float(insumos[i_s][3]) - pares
+                    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+                    insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
+                    insumos_operacion.append(insumo_pro)
+                    costo_materiales = costo_materiales + costo_insumo
+                    f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 1:
                 pares = float(input('INGRESA EL NUMERO DE PARES A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
-                insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = float(insumos[i_s][3]) - pares
-                escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
-                insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
-                insumos_operacion.append(insumo_pro)
-                costo_materiales = costo_materiales + costo_insumo
-                f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
+                if pares > float(insumos[i_s][3]):
+                    print('NO CUENTAS CON LA CANTIDAD SUFICIENTE DE UNIDADES DE ESTE INSUMO')
+                    input('SERÁ REGRESADO AL MENÚ PRINCIPAL PARA REABASTECER SUS INSUMOS -OPRIMA ENTER- ')
+                    f = 'n'
+                    break
+                else:
+                    costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
+                    insumos[i_s][5] = insumo.costo - costo_insumo
+                    insumos[i_s][3] = float(insumos[i_s][3]) - pares
+                    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+                    insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
+                    insumos_operacion.append(insumo_pro)
+                    costo_materiales = costo_materiales + costo_insumo
+                    f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 2:
                 pares = float(input('INGRESA EL NUMERO DE MASCARILLAS: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
-                insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = float(insumos[i_s][3]) - pares
-                escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
-                insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
-                insumos_operacion.append(insumo_pro)
-                costo_materiales = costo_materiales + costo_insumo
-                f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
+                if pares > float(insumos[i_s][3]):
+                    print('NO CUENTAS CON LA CANTIDAD SUFICIENTE DE UNIDADES DE ESTE INSUMO')
+                    input('SERÁ REGRESADO AL MENÚ PRINCIPAL PARA REABASTECER SUS INSUMOS -OPRIMA ENTER- ')
+                    f = 'n'
+                    break
+                else:
+                    costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
+                    insumos[i_s][5] = insumo.costo - costo_insumo
+                    insumos[i_s][3] = float(insumos[i_s][3]) - pares
+                    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+                    insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
+                    insumos_operacion.append(insumo_pro)
+                    costo_materiales = costo_materiales + costo_insumo
+                    f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 3:
                 pares = float(input('INGRESA EL NUMERO DE BABEROS A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
-                insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = float(insumos[i_s][3]) - pares
-                escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
-                insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
-                insumos_operacion.append(insumo_pro)
-                costo_materiales = costo_materiales + costo_insumo
-                f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
+                if pares > float(insumos[i_s][3]):
+                    print('NO CUENTAS CON LA CANTIDAD SUFICIENTE DE UNIDADES DE ESTE INSUMO')
+                    input('SERÁ REGRESADO AL MENÚ PRINCIPAL PARA REABASTECER SUS INSUMOS -OPRIMA ENTER- ')
+                    f = 'n'
+                    break
+                else:
+                    costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
+                    insumos[i_s][5] = insumo.costo - costo_insumo
+                    insumos[i_s][3] = float(insumos[i_s][3]) - pares
+                    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+                    insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
+                    insumos_operacion.append(insumo_pro)
+                    costo_materiales = costo_materiales + costo_insumo
+                    f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 4:
                 pares = float(input('INGRESA EL NUMERO DE JERINGAS: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
-                insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = float(insumos[i_s][3]) - pares
-                escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
-                insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
-                insumos_operacion.append(insumo_pro)
-                costo_materiales = costo_materiales + costo_insumo
-                f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
+                if pares > float(insumos[i_s][3]):
+                    print('NO CUENTAS CON LA CANTIDAD SUFICIENTE DE UNIDADES DE ESTE INSUMO')
+                    input('SERÁ REGRESADO AL MENÚ PRINCIPAL PARA REABASTECER SUS INSUMOS -OPRIMA ENTER- ')
+                    f = 'n'
+                    break
+                else:
+                    costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
+                    insumos[i_s][5] = insumo.costo - costo_insumo
+                    insumos[i_s][3] = float(insumos[i_s][3]) - pares
+                    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+                    insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
+                    insumos_operacion.append(insumo_pro)
+                    costo_materiales = costo_materiales + costo_insumo
+                    f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s == 5:
                 pares = float(input('INGRESA EL NUMERO DE MILILITROS DE ANESTESIA A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
-                insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = float(insumos[i_s][3]) - pares
-                escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
-                insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
-                insumos_operacion.append(insumo_pro)
-                costo_materiales = costo_materiales + costo_insumo
-                f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
+                if pares > float(insumos[i_s][3]):
+                    print('NO CUENTAS CON LA CANTIDAD SUFICIENTE DE UNIDADES DE ESTE INSUMO')
+                    input('SERÁ REGRESADO AL MENÚ PRINCIPAL PARA REABASTECER SUS INSUMOS -OPRIMA ENTER- ')
+                    f = 'n'
+                    break
+                else:
+                    costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
+                    insumos[i_s][5] = insumo.costo - costo_insumo
+                    insumos[i_s][3] = float(insumos[i_s][3]) - pares
+                    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+                    insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
+                    insumos_operacion.append(insumo_pro)
+                    costo_materiales = costo_materiales + costo_insumo
+                    f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
                 
             elif i_s > 5 and i_s < len(insumos):
                 pares = float(input('INGRESA EL NUMERO DE UNIDADES A UTILIZAR: '))
-                costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
-                insumos[i_s][5] = insumo.costo - costo_insumo
-                insumos[i_s][3] = float(insumos[i_s][3]) - pares
-                escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
-                insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
-                insumos_operacion.append(insumo_pro)
-                costo_materiales = costo_materiales + costo_insumo
-                f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
-        else:
-            a = False
-    
-    data_operación = Operacion(len(operaciones),tipo,mo,(mo+costo_materiales))
-    numerooperaciones = open('NUMERO_OPERACIONES.txt','a')
-    numerooperaciones.write(f'{len(operaciones)}\n')
-    numerooperaciones.close
-    numerooperaciones = open('NUMERO_OPERACIONES_USUARIO.txt','a')
-    numerooperaciones.write(f'{id_mos}\n')
-    numerooperaciones.close
-    op = [data_operación.id, id_mos]
-    nombre = (f'{pacientes[int(id_mos)][1]} {pacientes[int(id_mos)][2]} {pacientes[int(id_mos)][3]}')
-    operdatos = [data_operación.id,id_mos, nombre]
-    operaciones_con_nombre.append(operdatos)
-    operaciones.append(op)
-    archivooper = open(f'OPERACION_{id_mos}_{data_operación.id}.txt', 'a')
-    archivooper.write(f'ID OPERACIÓN: {data_operación.id}\n')
-    archivooper.write(f'PROCEDIMIENTO REALIZADO: {tipo}\n')
-    archivooper.write(f'CLIENTE A QUIEN SE LE REALIZO: {pacientes[int(id_mos)][1]} {pacientes[int(id_mos)][2]} {pacientes[int(id_mos)][3]}\n')
-    archivooper.write(f'MANO DE OBRA: ${mo}\n')
-    archivooper.write(f'COSTO MATERIALES: ${costo_materiales}\n')
-    archivooper.write(f'COSTO TOTAL OPERACIÓN: ${data_operación.costTot}\n')
-    for i in range (0, len(insumos_operacion)):
-        archivooper.write(f'ID INSUMO: {insumos_operacion[i][0]} | NOMBRE DEL INSUMO: {insumos_operacion[i][1]} | UNIDADES UTILIZADAS: {insumos_operacion[i][2]}\n')
-    archivooper.close
-    ingresos = open('INGRESOS.txt','r')
-    ganancia_parcial = 0
-    for i in ingresos:
-        ganancia_parcial = float(i)
-    ingresos.close
-    ingresosw = open('INGRESOS.txt','w')
-    ingresosw.write(f'{ganancia_parcial+mo}')
-    
-    ingresos = open('GASTOS.txt','r')
-    ganancia_parcial = 0
-    for i in ingresos:
-        ganancia_parcial = float(i)
-    ingresos.close
-    ingresosw = open('GASTOS.txt','w')
-    ingresosw.write(f'{ganancia_parcial+costo_materiales}')
-    historialoperaciones = open('Hist_Oper.txt','a')
-    historialoperaciones.write(f'ID OPERACIÓN: {data_operación.id} | PROCEDIMIENTO REALIZADO: {tipo} | CLIENTE: {pacientes[int(id_mos)][1]} {pacientes[int(id_mos)][2]} {pacientes[int(id_mos)][3]} | COSTO OPERACIÓN: ${data_operación.costTot}\n')
-    historialoperaciones.close
-    archivo_operaciones_por_paciente = open(f'Operaciones_{id_mos}.txt','a')
-    archivo_operaciones_por_paciente.write(f'ID OPERACIÓN: {data_operación.id} | PROCEDIMIENTO REALIZADO: {tipo} | COSTO OPERACIÓN: ${data_operación.costTot}\n')
-    archivo_operaciones_por_paciente.close
-    archivo_aportación = open(f'APORTACION_{id_mos}.txt','a')
-    archivo_aportación.close
+                if pares > float(insumos[i_s][3]):
+                    print('NO CUENTAS CON LA CANTIDAD SUFICIENTE DE UNIDADES DE ESTE INSUMO')
+                    input('SERÁ REGRESADO AL MENÚ PRINCIPAL PARA REABASTECER SUS INSUMOS -OPRIMA ENTER- ')
+                    f = 'n'
+                    break
+                else:
+                    costo_insumo = ((float(insumos[i_s][5]) / float(insumos[i_s][3])) * pares)
+                    insumos[i_s][5] = insumo.costo - costo_insumo
+                    insumos[i_s][3] = float(insumos[i_s][3]) - pares
+                    escribir_archivo_insumos(i_s, insumos[i_s][1], insumos[i_s][2], insumos[i_s][3], insumos[i_s][4], insumos[i_s][5], insumos[i_s][6])
+                    insumo_pro = [insumos[i_s][0], insumos[i_s][1],pares]
+                    insumos_operacion.append(insumo_pro)
+                    costo_materiales = costo_materiales + costo_insumo
+                    f = str(input('UTILIZARÁ ALGUN OTRO INSUMO? (s/n): '))
+            
 
-    archivo_aportación = open(f'APORTACION_{id_mos}.txt','r')
-    ap_parcial = 0
-    for i in archivo_aportación:
-        ap_parcial = float(i)
-    archivo_aportación.close
-    apw = open(f'APORTACION_{id_mos}.txt','w')
-    apw.write(f'{ap_parcial+data_operación.costTot}')
+        else:
+            data_operación = Operacion(len(operaciones),tipo,mo,(mo+costo_materiales))
+            numerooperaciones = open('NUMERO_OPERACIONES.txt','a')
+            numerooperaciones.write(f'{len(operaciones)}\n')
+            numerooperaciones.close
+            numerooperaciones = open('NUMERO_OPERACIONES_USUARIO.txt','a')
+            numerooperaciones.write(f'{id_mos}\n')
+            numerooperaciones.close
+            op = [data_operación.id, id_mos]
+            nombre = (f'{pacientes[int(id_mos)][1]} {pacientes[int(id_mos)][2]} {pacientes[int(id_mos)][3]}')
+            operdatos = [data_operación.id,id_mos, nombre]
+            operaciones_con_nombre.append(operdatos)
+            operaciones.append(op)
+            archivooper = open(f'OPERACION_{id_mos}_{data_operación.id}.txt', 'a')
+            archivooper.write(f'ID OPERACIÓN: {data_operación.id}\n')
+            archivooper.write(f'PROCEDIMIENTO REALIZADO: {tipo}\n')
+            archivooper.write(f'CLIENTE A QUIEN SE LE REALIZO: {pacientes[int(id_mos)][1]} {pacientes[int(id_mos)][2]} {pacientes[int(id_mos)][3]}\n')
+            archivooper.write(f'MANO DE OBRA: ${mo}\n')
+            archivooper.write(f'COSTO MATERIALES: ${costo_materiales}\n')
+            archivooper.write(f'COSTO TOTAL OPERACIÓN: ${data_operación.costTot}\n')
+            for i in range (0, len(insumos_operacion)):
+                archivooper.write(f'ID INSUMO: {insumos_operacion[i][0]} | NOMBRE DEL INSUMO: {insumos_operacion[i][1]} | UNIDADES UTILIZADAS: {insumos_operacion[i][2]}\n')
+            archivooper.close
+            ingresos = open('INGRESOS.txt','r')
+            ganancia_parcial = 0
+            for i in ingresos:
+                ganancia_parcial = float(i)
+            ingresos.close
+            ingresosw = open('INGRESOS.txt','w')
+            ingresosw.write(f'{ganancia_parcial+mo}')
+            
+            ingresos = open('GASTOS.txt','r')
+            ganancia_parcial = 0
+            for i in ingresos:
+                ganancia_parcial = float(i)
+            ingresos.close
+            ingresosw = open('GASTOS.txt','w')
+            ingresosw.write(f'{ganancia_parcial+costo_materiales}')
+            historialoperaciones = open('Hist_Oper.txt','a')
+            historialoperaciones.write(f'ID OPERACIÓN: {data_operación.id} | PROCEDIMIENTO REALIZADO: {tipo} | CLIENTE: {pacientes[int(id_mos)][1]} {pacientes[int(id_mos)][2]} {pacientes[int(id_mos)][3]} | COSTO OPERACIÓN: ${data_operación.costTot}\n')
+            historialoperaciones.close
+            archivo_operaciones_por_paciente = open(f'Operaciones_{id_mos}.txt','a')
+            archivo_operaciones_por_paciente.write(f'ID OPERACIÓN: {data_operación.id} | PROCEDIMIENTO REALIZADO: {tipo} | COSTO OPERACIÓN: ${data_operación.costTot}\n')
+            archivo_operaciones_por_paciente.close
+            archivo_aportación = open(f'APORTACION_{id_mos}.txt','a')
+            archivo_aportación.close
+        
+            archivo_aportación = open(f'APORTACION_{id_mos}.txt','r')
+            ap_parcial = 0
+            for i in archivo_aportación:
+                ap_parcial = float(i)
+            archivo_aportación.close
+            apw = open(f'APORTACION_{id_mos}.txt','w')
+            apw.write(f'{ap_parcial+data_operación.costTot}')
+            a = False
 
 def lectura_operaciones():
     idOperGen = open('NUMERO_OPERACIONES.txt', 'r')
@@ -557,17 +600,20 @@ def ver_historial_operaciones():
     hist.close
 
 def ver_hist_pacientes():
-    print("OPERACIONES DE LAS CUALES SE PUEDE HACER CONSULTA")
-    for i in range (0,len(operaciones_con_nombre)):
-        print(f'{i}.- ID OPERACION: {operaciones_con_nombre[i][0]} | ID CLIENTE: {operaciones_con_nombre[i][1]} | NOMBRE CLIENTE: {operaciones_con_nombre[i][2]}')
-    a = int(input('ESCRIBE EL ID DE LISTA PARA MÁS INFORMACIÓN (ej. 1.-): '))
-    clear_console()
-    archivooper = open(f'OPERACION_{operaciones_con_nombre[a][1]}_{operaciones_con_nombre[a][0]}.txt', 'r')
-    for i in archivooper:
-        j = i
-        t = j.replace("\n","")
-        print(t)
-    archivooper.close
+    if len(operaciones_con_nombre) != 0:
+        print("OPERACIONES DE LAS CUALES SE PUEDE HACER CONSULTA")
+        for i in range (0,len(operaciones_con_nombre)):
+            print(f'{i}.- ID OPERACION: {operaciones_con_nombre[i][0]} | ID CLIENTE: {operaciones_con_nombre[i][1]} | NOMBRE CLIENTE: {operaciones_con_nombre[i][2]}')
+        a = int(input('ESCRIBE EL ID DE LISTA PARA MÁS INFORMACIÓN (ej. 1.-): '))
+        clear_console()
+        archivooper = open(f'OPERACION_{operaciones_con_nombre[a][1]}_{operaciones_con_nombre[a][0]}.txt', 'r')
+        for i in archivooper:
+            j = i
+            t = j.replace("\n","")
+            print(t)
+        archivooper.close
+    else:
+        print('AUN NO SE HAN REALIZADO OPERACIONES')
 
 def operaciones_paciente():
     print("¿DE QUE PACIENTE DESEA VER SU INFORMACIÓN DE APORTACIONES Y OPERACIONES?")
@@ -720,6 +766,8 @@ def menu():
 
 
 #----------------------------------------------------------------------
+historiales = open('Hist_Oper.txt','a')
+historiales.close
 gastos_engeneral = open('Gastos_Insumos.txt','a')
 gastos_engeneral.close
 ingresos = open('INGRESOS.txt','a')
