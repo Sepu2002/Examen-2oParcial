@@ -77,8 +77,17 @@ def habilitarPac ():
     for i in range (0,len(pacientes)):
         if pacientes[i][6] == 'False':
             print(f'{pacientes[i][0]}.- {pacientes[i][1]} {pacientes[i][2]} {pacientes[i][3]}')
-    id_mos = input("INGRESA EL ID DE QUIEN DESEAS HABILITAR: ")
+    id_mos = int(input("INGRESA EL ID DE QUIEN DESEAS HABILITAR: "))
     pacientes[int(id_mos)][6] = 'True'
+    expediente = open(f"{id_mos}_lista.txt", 'w')
+    expediente.write(f'{pacientes[id_mos][0]}\n')
+    expediente.write(f'{pacientes[id_mos][1]}\n')
+    expediente.write(f'{pacientes[id_mos][2]}\n')
+    expediente.write(f'{pacientes[id_mos][3]}\n')
+    expediente.write(f'{pacientes[id_mos][4]}\n')
+    expediente.write(f'{pacientes[id_mos][5]}\n')
+    expediente.write(str(pacientes[id_mos][6]))
+    expediente.close
     input("PACIENTE HABILITADO EXITOSAMENTE ------- PRESIONA ENTER PARA CONTINUAR")
 
 def deshabilitarPac ():
@@ -86,8 +95,17 @@ def deshabilitarPac ():
     for i in range (0,len(pacientes)):
         if pacientes[i][6] == 'True':
             print(f'{pacientes[i][0]}.- {pacientes[i][1]} {pacientes[i][2]} {pacientes[i][3]}')
-    id_mos = input("INGRESA EL ID DE QUIEN DESEAS DESHABILITAR: ")
+    id_mos = int(input("INGRESA EL ID DE QUIEN DESEAS DESHABILITAR: "))
     pacientes[int(id_mos)][6] = 'False'
+    expediente = open(f"{id_mos}_lista.txt", 'w')
+    expediente.write(f'{pacientes[id_mos][0]}\n')
+    expediente.write(f'{pacientes[id_mos][1]}\n')
+    expediente.write(f'{pacientes[id_mos][2]}\n')
+    expediente.write(f'{pacientes[id_mos][3]}\n')
+    expediente.write(f'{pacientes[id_mos][4]}\n')
+    expediente.write(f'{pacientes[id_mos][5]}\n')
+    expediente.write(str(pacientes[id_mos][6]))
+    expediente.close
     input("PACIENTE DESHABILITADO EXITOSAMENTE ------- PRESIONA ENTER PARA CONTINUAR")
 
 def getAlergias():
@@ -305,23 +323,23 @@ def alta_insumo():
         gastos_general(precio * cajas)
 
     clear_console()
-    print('...................RESUMEN DE INSUMOS............................')
+    print('.....................................................RESUMEN DE INSUMOS..................................................................................')
     print('|   ID    |   INSUMO   |   CAJAS/FRASCOS ACUMULADOS   |   UNIDADES TOTALES  |   PRECIO CAJA/FRASCO ULTIMO   |   COSTO DE LAS UNIDADES EN EXISTENCIA   |')
     for i in range (0, len(insumos)):
         if int(insumos[i][6]) == 1:
-            print('..........................................................................')
-            print(f'|   {insumos[i][0]}   |   {insumos[i][1]}   |   {insumos[i][2]}   |   {insumos[i][3]}   |   {insumos[i][4]}   |   {insumos[i][5]}   |')
-    print('..........................................................................')
+            print('......................................................................................................................................................')
+            print(f'|     {insumos[i][0]}     |     {insumos[i][1]}     |     {insumos[i][2]}     |     {insumos[i][3]}     |     {insumos[i][4]}     |     {insumos[i][5]}     |')
+    print('......................................................................................................................................................')
 
 def ver_insumos():
     clear_console()
-    print('...................RESUMEN DE INSUMOS............................')
+    print('.....................................................RESUMEN DE INSUMOS..................................................................................')
     print('|   ID    |   INSUMO   |   CAJAS/FRASCOS ACUMULADOS   |   UNIDADES TOTALES  |   PRECIO CAJA/FRASCO ULTIMO   |   COSTO DE LAS UNIDADES EN EXISTENCIA   |')
     for i in range (0, len(insumos)):
         if int(insumos[i][6]) == 1:
-            print('..........................................................................')
-            print(f'|   {insumos[i][0]}   |   {insumos[i][1]}   |   {insumos[i][2]}   |   {insumos[i][3]}   |   {insumos[i][4]}   |   {insumos[i][5]}   |')
-    print('..........................................................................')
+            print('......................................................................................................................................................')
+            print(f'|   {insumos[i][0]}     |     {insumos[i][1]}     |     {insumos[i][2]}     |     {insumos[i][3]}     |     {insumos[i][4]}     |     {insumos[i][5]}     |')
+    print('......................................................................................................................................................')
 
 def habilitar_insumo():
     nombre = str(input('INGRESA EL NOMBRE DEL INSUMO: '))
