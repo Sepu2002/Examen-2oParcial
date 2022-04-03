@@ -28,9 +28,6 @@ class Expediente():
         self.Alergias=Alergias
         self.Ant_Cancer=Ant_Cancer
         self.Ant_Diabetes=Ant_Diabetes
-        
-    
-        
 
 class Insumos():
     def __init__(self, id, nombre, cantidad, costo):
