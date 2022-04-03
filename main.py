@@ -606,7 +606,8 @@ def ver_hist_pacientes():
             print(f'{i}.- ID OPERACION: {operaciones_con_nombre[i][0]} | ID CLIENTE: {operaciones_con_nombre[i][1]} | NOMBRE CLIENTE: {operaciones_con_nombre[i][2]}')
         a = int(input('ESCRIBE EL ID DE LISTA PARA MÁS INFORMACIÓN (ej. 1.-): '))
         clear_console()
-        archivooper = open(f'OPERACION_{operaciones_con_nombre[a][1]}_{operaciones_con_nombre[a][0]}.txt', 'r')
+        histor = Historial(operaciones_con_nombre[a][1], operaciones_con_nombre[a][0])
+        archivooper = open(f'OPERACION_{histor.id_PACIENTE}_{histor.id_OPERACION}.txt', 'r')
         for i in archivooper:
             j = i
             t = j.replace("\n","")

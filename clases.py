@@ -47,7 +47,6 @@ class Operacion():
         self.costTot=costTot
         
 class Historial():
-    def __init__(self, id, id_PACIENTE, id_OPERACION):
-        self.id=id
+    def __init__(self, id_PACIENTE, id_OPERACION):
         self.id_PACIENTE=id_PACIENTE
         self.id_OPERACION=id_OPERACION
