@@ -55,6 +55,7 @@ class ventanaPrincipal(QWidget):
         Log=QPushButton('Logaritmo', clicked=self.logtext)
         Sqrt=QPushButton('Raíz cuadrada', clicked=self.sqrtext)
         Exp=QPushButton('Euler (e)', clicked=self.Etext)
+        Pi=QPushButton('Pi', clicked=self.Pitext)
         Sin=QPushButton('Seno', clicked=self.sintext)
         Cos=QPushButton('Coseno', clicked=self.costext)
         Tan=QPushButton('Tangente', clicked=self.tantext)
@@ -86,6 +87,7 @@ Edgar Daniel Chacón Amaro''')
         layout.addWidget(Log,4,0,1,1)
         layout.addWidget(Sqrt,5,0,1,1)
         layout.addWidget(Exp,6,0,1,1)
+        layout.addWidget(Pi,7,0,1,1)
         layout.addWidget(Sin,3,1,1,1)
         layout.addWidget(Cos,4,1,1,1)
         layout.addWidget(Tan,5,1,1,1)
@@ -112,6 +114,10 @@ Edgar Daniel Chacón Amaro''')
     def Etext(self):
         current=self.campos_texto['Integral'].text()
         self.campos_texto['Integral'].setText(current+"m.e")
+        
+    def Pitext(self):
+        current=self.campos_texto['Integral'].text()
+        self.campos_texto['Integral'].setText(current+"np.pi")
     
     def sintext(self):
         current=self.campos_texto['Integral'].text()
