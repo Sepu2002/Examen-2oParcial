@@ -1,0 +1,9 @@
+ID PACIENTE: 0
+NOMBRE: Ernesto Guemes Landeros
+EDAD: 40
+SEXO: m
+True
+ID EXPEDIENTE: 0
+ALERGIA 1: pollen, 
+ANT. CANCER: n
+ANT. DIABETES: n

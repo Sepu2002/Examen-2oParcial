@@ -1,0 +1,9 @@
+ID PACIENTE: 1
+NOMBRE: Luis Lores Puentes
+EDAD: 19
+SEXO: m
+True
+ID EXPEDIENTE: 1
+ALERGIA 1: Ninguna, 
+ANT. CANCER: n
+ANT. DIABETES: n
